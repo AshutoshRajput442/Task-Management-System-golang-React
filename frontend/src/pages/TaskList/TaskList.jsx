@@ -2,7 +2,9 @@ import React from "react";
 
 const TaskList = ({ tasks }) => {
   if (!tasks || tasks.length === 0)
-    return <p className="text-gray-600 text-center mt-8">No tasks available.</p>;
+    return (
+      <p className="text-gray-600 text-center mt-8">No tasks available.</p>
+    );
 
   return (
     <div className="mt-6 space-y-4">
@@ -15,7 +17,9 @@ const TaskList = ({ tasks }) => {
             {/* <h2 className="text-lg font-semibold text-indigo-700">{task.id}</h2> */}
 
             <div className="w-1/3">
-              <h2 className="text-md font-semibold text-indigo-700">{task.title}</h2>
+              <h2 className="text-md font-semibold text-indigo-700">
+                {task.title}
+              </h2>
             </div>
 
             <div className="w-2/3">
@@ -23,8 +27,8 @@ const TaskList = ({ tasks }) => {
             </div>
 
             <div className="text-xs text-gray-500 whitespace-nowrap">
-              {task.created_at &&
-                new Date(task.created_at).toLocaleDateString("en-US", {
+              {task.createdAt &&
+                new Date(task.createdAt).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "short",
                   day: "numeric",
@@ -51,11 +55,6 @@ const TaskList = ({ tasks }) => {
 
 export default TaskList;
 
-
-
-
-
-
 // import React from "react";
 
 // const TaskList = ({ tasks }) => {
@@ -71,7 +70,7 @@ export default TaskList;
 //         >
 //           <div className="flex flex-row gap-10 w-full">
 //             {/* <h2 className="text-lg font-semibold text-indigo-700">{task.id}</h2> */}
-            
+
 //             <div className="w-1/3">
 //               <h2 className="text-md font-semibold text-indigo-700">{task.title}</h2>
 //             </div>
@@ -85,7 +84,7 @@ export default TaskList;
 //                 year: "numeric",
 //                 month: "short",
 //                 day: "numeric",
-                
+
 //               })}
 //             </div>
 //           </div>
