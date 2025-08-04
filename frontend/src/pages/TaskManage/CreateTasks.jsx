@@ -1,6 +1,6 @@
 // src/pages/Tasks.jsx
 import React, { useEffect, useState } from "react";
-import { createTask, getTasks } from "../api/taskApi";
+import { createTask, getTasks } from "../../api/taskApi";
 import TaskList from "./TaskList/TaskList";
 
 const CreateTasks = () => {

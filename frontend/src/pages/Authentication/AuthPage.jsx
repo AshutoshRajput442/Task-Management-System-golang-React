@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { signup, login } from "../api/api";
+import { signup, login } from "../../api/api";
 import { useNavigate } from "react-router-dom";
 
 const AuthPage = () => {

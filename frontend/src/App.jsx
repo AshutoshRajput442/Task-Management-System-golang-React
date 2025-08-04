@@ -3,14 +3,14 @@ import {
   RouterProvider,
 
 } from "react-router-dom";
-import AuthPage from "./pages/AuthPage";
+import AuthPage from './pages/Authentication/AuthPage';
 import AppLayout from "./MainLayoutAllFiles/AppLayout";
 import Dashboard from "./pages/Dashboard/Dashboard";
 
 import DashboardHome from "./pages/Dashboard/DashboardHome";
-import UserProfile from "./pages/UserProfile";
-import AllTasks from './pages/AllTasks';
-import CreateTasks from "./pages/CreateTasks";
+import UserProfile from "./pages/ProfileManage/UserProfile";
+import AllTasks from './pages/TaskManage/AllTasks';
+import CreateTasks from './pages/TaskManage/CreateTasks';
 
 //---------- second Project----------
 const router = createBrowserRouter([
@@ -31,9 +31,7 @@ const router = createBrowserRouter([
           // other child routes
         ],
       },
-    ],
-  },
-  // { path: "tasks", element: <MyTasks /> },
+      // { path: "tasks", element: <MyTasks /> },
   {
     path: "/users",
     element: <UserProfile />,
@@ -42,6 +40,9 @@ const router = createBrowserRouter([
     path: "/create-task",
     element: <CreateTasks />,
   },
+    ],
+  },
+  
 ]);
 
 function App() {
