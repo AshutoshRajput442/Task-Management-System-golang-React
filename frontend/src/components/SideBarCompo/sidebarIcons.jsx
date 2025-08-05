@@ -9,5 +9,5 @@ export const sidebarIcons = [
     path: "/notifications",
     icon: "IoIosNotifications",
   },
-  { label: "Logout", path: "/", icon: "RiLogoutCircleFill" },
+  { label: "Logout", path: "/", icon: "RiLogoutCircleFill", isLogout: true },
 ];

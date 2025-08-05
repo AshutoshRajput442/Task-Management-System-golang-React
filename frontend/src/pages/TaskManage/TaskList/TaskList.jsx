@@ -8,13 +8,20 @@ const TaskList = ({ tasks }) => {
 
   return (
     <div className="mt-6 space-y-4">
-      {tasks.map((task) => (
+      {tasks.map((task, index) => (
         <div
           key={task.id}
           className="flex items-center justify-between bg-white border border-gray-200 shadow-sm rounded-xl px-6 py-4 hover:shadow-md transition"
         >
           <div className="flex flex-row gap-10 w-full">
             {/* <h2 className="text-lg font-semibold text-indigo-700">{task.id}</h2> */}
+
+ {/* Sequence Number */}
+            <div className="w-1/12">
+              <h2 className="text-md font-semibold text-gray-700">
+                {index + 1}.
+              </h2>
+            </div>
 
             <div className="w-1/3">
               <h2 className="text-md font-semibold text-indigo-700">

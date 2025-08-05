@@ -7,6 +7,7 @@ import DashboardHome from "./pages/Dashboard/DashboardHome";
 import UserProfile from "./pages/ProfileManage/UserProfile";
 import AllTasks from "./pages/TaskManage/AllTasks";
 import CreateTasks from "./pages/TaskManage/CreateTasks";
+import Notification from "./pages/Notification/Notification";
 
 //---------- second Project----------
 const router = createBrowserRouter([
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/create-task",
         element: <CreateTasks />,
+      },
+      {
+        path: "/notifications",
+        element: <Notification />,
       },
     ],
   },
