@@ -8,5 +8,9 @@ import (
 
 func RegisterUserRoutes(r *mux.Router) {
 	// this is used for get user profile
-	r.HandleFunc("/tasks", controllers.GetUserProfile).Methods("GET")
+	r.HandleFunc("/me", controllers.GetUserProfile).Methods("GET")
+
+	// r.HandleFunc("/me", controllers.UpdateUserProfile).Methods("PUT")
+	r.HandleFunc("/update-password", controllers.UpdatePassword).Methods("PUT")
+
 }

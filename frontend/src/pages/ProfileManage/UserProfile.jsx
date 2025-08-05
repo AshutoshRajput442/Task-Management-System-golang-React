@@ -1,29 +1,34 @@
 import React, { useState, useEffect } from "react";
+import { fetchUserProfile } from './../../api/userApi';
 
 const UserProfile = () => {
-  // Simulate fetched user
-  const [user, setUser] = useState({
-    name: "Ashu",
-    email: "ashu@example.com",
-    role: "Admin",
-  });
-
-  const [formData, setFormData] = useState(user);
+  const [user, setUser] = useState({ name: "", email: "" });
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
-    // TODO: Fetch user info from backend here
-    setFormData(user);
-  }, [user]);
+    const token = localStorage.getItem("token");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+    fetchUserProfile(token)
+      .then((data) => setUser({ name: data.name, email: data.email }))
+      .catch((err) => {
+        console.error(err);
+        alert("Error fetching profile");
+      });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: Submit updated info to backend
-    console.log("Updating user:", formData);
+    const token = localStorage.getItem("token");
+
+    updateUserPassword(token, password)
+      .then(() => {
+        alert("Password updated successfully!");
+        setPassword("");
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Failed to update password");
+      });
   };
 
   return (
@@ -35,42 +40,30 @@ const UserProfile = () => {
           <div>
             <label className="block text-gray-400 mb-1">Name</label>
             <input
-              name="name"
-              type="text"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full p-2 bg-[#2a2a3f] text-white rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-600"
+              value={user.name}
+              readOnly
+              className="w-full p-2 bg-[#2a2a3f] text-white rounded border border-gray-600 opacity-50 cursor-not-allowed"
             />
           </div>
 
           <div>
             <label className="block text-gray-400 mb-1">Email</label>
             <input
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full p-2 bg-[#2a2a3f] text-white rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-600"
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-400 mb-1">Password</label>
-            <input
-              name="password"
-              type="password"
-              placeholder="••••••••"
-              onChange={handleChange}
-              className="w-full p-2 bg-[#2a2a3f] text-white rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-600"
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-400 mb-1">Role</label>
-            <input
-              value={formData.role}
+              value={user.email}
               readOnly
               className="w-full p-2 bg-[#2a2a3f] text-white rounded border border-gray-600 opacity-50 cursor-not-allowed"
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-400 mb-1">New Password</label>
+            <input
+              type="password"
+              value={password}
+              placeholder="••••••••"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full p-2 bg-[#2a2a3f] text-white rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-600"
             />
           </div>
 
@@ -78,7 +71,7 @@ const UserProfile = () => {
             type="submit"
             className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded text-white font-semibold"
           >
-            Update Profile
+            Update Password
           </button>
         </form>
       </div>

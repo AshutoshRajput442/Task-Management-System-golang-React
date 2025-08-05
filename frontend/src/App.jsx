@@ -1,16 +1,12 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-
-} from "react-router-dom";
-import AuthPage from './pages/Authentication/AuthPage';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AuthPage from "./pages/Authentication/AuthPage";
 import AppLayout from "./MainLayoutAllFiles/AppLayout";
 import Dashboard from "./pages/Dashboard/Dashboard";
 
 import DashboardHome from "./pages/Dashboard/DashboardHome";
 import UserProfile from "./pages/ProfileManage/UserProfile";
-import AllTasks from './pages/TaskManage/AllTasks';
-import CreateTasks from './pages/TaskManage/CreateTasks';
+import AllTasks from "./pages/TaskManage/AllTasks";
+import CreateTasks from "./pages/TaskManage/CreateTasks";
 
 //---------- second Project----------
 const router = createBrowserRouter([
@@ -32,17 +28,16 @@ const router = createBrowserRouter([
         ],
       },
       // { path: "tasks", element: <MyTasks /> },
-  {
-    path: "/users",
-    element: <UserProfile />,
-  },
-   {
-    path: "/create-task",
-    element: <CreateTasks />,
-  },
+      {
+        path: "/users",
+        element: <UserProfile />,
+      },
+      {
+        path: "/create-task",
+        element: <CreateTasks />,
+      },
     ],
   },
-  
 ]);
 
 function App() {
@@ -50,19 +45,6 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Dashboard component sirf ek container ya layout ki tarah kaam karta hai jahan pe <Outlet /> lagaya hota hai.
 
@@ -80,4 +62,3 @@ export default App;
 // Jab aap /dashboard jaoge, toh wo container box ke andar cards wala box khulega.
 
 // Jab aap kisi card pe click karke /dashboard/tasks jaoge, toh wo container box ke andar task list wala box khulega, aur cards wala box chhup jayega.
-

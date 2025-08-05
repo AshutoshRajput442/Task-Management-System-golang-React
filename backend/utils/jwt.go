@@ -34,16 +34,42 @@ func GenerateJWT(userID int, email string) (string, error) {
 //		userID := int(claims["user_id"].(float64))
 //		return userID, nil
 //	}
+// func ValidateToken(tokenStr string) (string, error) {
+// 	token, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
+// 		return jwtKey, nil
+// 	})
+// 	if err != nil || !token.Valid {
+// 		return "", err
+// 	}
+
+// 	claims := token.Claims.(jwt.MapClaims)
+// 	email := claims["email"].(string)
+// 	return email, nil
+// }
+
 func ValidateToken(tokenStr string) (string, error) {
 	token, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
 		return jwtKey, nil
 	})
 	if err != nil || !token.Valid {
-		return "", err
+		return "", fmt.Errorf("invalid token")
 	}
 
-	claims := token.Claims.(jwt.MapClaims)
-	email := claims["email"].(string)
+	claims, ok := token.Claims.(jwt.MapClaims)
+	if !ok {
+		return "", fmt.Errorf("invalid claims type")
+	}
+
+	emailVal, ok := claims["email"]
+	if !ok {
+		return "", fmt.Errorf("email not found in token")
+	}
+
+	email, ok := emailVal.(string)
+	if !ok {
+		return "", fmt.Errorf("email is not a string")
+	}
+
 	return email, nil
 }
 
