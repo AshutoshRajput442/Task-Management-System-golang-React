@@ -19,8 +19,7 @@ func UpdatePassword(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req UpdatePasswordRequest
-	err = json.NewDecoder(r.Body).Decode(&req)
-	if err != nil || req.Password == "" {
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil || req.Password == "" {
 		http.Error(w, "Invalid input", http.StatusBadRequest)
 		return
 	}
@@ -31,9 +30,15 @@ func UpdatePassword(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err = config.DB.Exec("UPDATE users SET password = ? WHERE email = ?", hashedPwd, email)
+	res, err := config.DB.Exec("UPDATE users SET password = ? WHERE email = ?", hashedPwd, email)
 	if err != nil {
 		http.Error(w, "Failed to update password", http.StatusInternalServerError)
+		return
+	}
+
+	rows, _ := res.RowsAffected()
+	if rows == 0 {
+		http.Error(w, "User not found", http.StatusNotFound)
 		return
 	}
 
