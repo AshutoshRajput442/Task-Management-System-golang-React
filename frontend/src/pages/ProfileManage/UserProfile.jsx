@@ -85,9 +85,10 @@ const UserProfile = () => {
             Update Password
           </button>
         </form>
-      </div>
+      </div> 
     </div>
   );
 };
 
 export default UserProfile;
+//done 
