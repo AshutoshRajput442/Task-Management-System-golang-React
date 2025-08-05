@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { fetchUserProfile } from './../../api/userApi';
+import { fetchUserProfile, updateUserPassword } from "./../../api/userApi";
+import { Eye, EyeOff } from "lucide-react"; // 👈 make sure you have lucide-react installed
 
 const UserProfile = () => {
   const [user, setUser] = useState({ name: "", email: "" });
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // 👈 for toggle
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -57,14 +59,23 @@ const UserProfile = () => {
 
           <div>
             <label className="block text-gray-400 mb-1">New Password</label>
-            <input
-              type="password"
-              value={password}
-              placeholder="••••••••"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full p-2 bg-[#2a2a3f] text-white rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-600"
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                placeholder="••••••••"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full p-2 pr-10 bg-[#2a2a3f] text-white rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-600"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-400"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
           </div>
 
           <button

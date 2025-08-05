@@ -1,5 +1,6 @@
 const API_BASE_URL = "http://localhost:8080";
 
+// Fetch the user profile
 export const fetchUserProfile = async (token) => {
   const res = await fetch(`${API_BASE_URL}/me`, {
     method: "GET",
@@ -15,6 +16,7 @@ export const fetchUserProfile = async (token) => {
   return res.json();
 };
 
+// Update user password
 export const updateUserPassword = async (token, password) => {
   const res = await fetch(`${API_BASE_URL}/update-password`, {
     method: "PUT",
